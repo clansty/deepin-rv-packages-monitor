@@ -60,7 +60,7 @@ let
   # Main project derivation.
   project = stdenv.mkDerivation (drvCommon // {
     inherit src;
-    name = "qwq";
+    name = "plct-packages-monitor";
     # Disable Nixify plugin to save on some unnecessary processing.
     yarn_enable_nixify = "false";
 

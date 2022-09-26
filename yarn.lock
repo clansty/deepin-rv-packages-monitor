@@ -2195,6 +2195,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"plct-packages-monitor@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "plct-packages-monitor@workspace:."
+  dependencies:
+    "@vitejs/plugin-vue-jsx": ^2.0.1
+    naive-ui: ^2.33.3
+    pinia: ^2.0.22
+    sass: ^1.54.9
+    typescript: ^4.8.3
+    vfonts: ^0.0.3
+    vite: ^3.1.3
+    vue: ^3.2.39
+    vue-router: ^4.1.5
+    vue-tsc: ^0.40.13
+  languageName: unknown
+  linkType: soft
+
 "postcss@npm:^8.1.10":
   version: 8.4.5
   resolution: "postcss@npm:8.4.5"
@@ -2233,23 +2250,6 @@ __metadata:
   checksum: f96a3f6d90b92b568a26f71e966cbbc0f63ab85ea6ff6c81284dc869b41510e6cdef99b6b65f9030f0db422bf7c96652a3fff9f2e8fb4a0f069d8f4430359429
   languageName: node
   linkType: hard
-
-"qwq@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "qwq@workspace:."
-  dependencies:
-    "@vitejs/plugin-vue-jsx": ^2.0.1
-    naive-ui: ^2.33.3
-    pinia: ^2.0.22
-    sass: ^1.54.9
-    typescript: ^4.8.3
-    vfonts: ^0.0.3
-    vite: ^3.1.3
-    vue: ^3.2.39
-    vue-router: ^4.1.5
-    vue-tsc: ^0.40.13
-  languageName: unknown
-  linkType: soft
 
 "readable-stream@npm:^3.6.0":
   version: 3.6.0
