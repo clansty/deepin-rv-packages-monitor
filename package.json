@@ -6,13 +6,16 @@
     "dev:expose": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src/**/*.{ts,tsx,js,jsx} --fix"
+    "lint": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
+    "convert": "ts-node tools/convert/index.ts"
   },
   "devDependencies": {
+    "@types/node": "^18.8.5",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "naive-ui": "^2.33.3",
     "pinia": "^2.0.22",
     "sass": "^1.54.9",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.3",
     "vfonts": "^0.0.3",
     "vite": "^3.1.3",

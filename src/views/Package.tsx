@@ -1,66 +1,67 @@
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
-import packages from '@/stores/packages';
-import { getDescription, getProp, hSize } from '@/utils/packageFuns';
+import packages from '@/data.json';
+import { Package } from '@/types';
 
 export default defineComponent({
   render() {
     const route = useRoute();
-    const packageInfo = packages.find(it => getProp(it, 'Package') === route.params.package) as string;
+    // @ts-ignore
+    const pkg: Package = packages.riscvCompare.find(it => it.package === route.params.package);
     return <div>
-      <h1>{getProp(packageInfo, 'Package')} {getProp(packageInfo, 'Version')}</h1>
+      <h1>{pkg.package} {pkg.version}</h1>
       <table>
         <tbody>
         <tr>
           <td>Architecture:</td>
-          <td>{getProp(packageInfo, 'Architecture')}</td>
+          <td>{pkg.architecture}</td>
         </tr>
         <tr>
           <td>Maintainer:</td>
-          <td>{getProp(packageInfo, 'Maintainer')}</td>
+          <td>{pkg.maintainer}</td>
         </tr>
         <tr>
           <td>Size:</td>
-          <td>{hSize(Number(getProp(packageInfo, 'Size')))}</td>
+          <td>{pkg.size}</td>
         </tr>
         <tr>
           <td>Installed Size:</td>
-          <td>{hSize(Number(getProp(packageInfo, 'Installed-Size')))}</td>
+          <td>{pkg.installedSize}</td>
         </tr>
         <tr>
           <td>HomePage:</td>
-          <td><a href={getProp(packageInfo, 'Homepage')}>{getProp(packageInfo, 'Homepage')}</a></td>
+          <td><a href={pkg.homepage}>{pkg.homepage}</a></td>
         </tr>
         <tr>
           <td>Depends:</td>
-          <td>{getProp(packageInfo, 'Depends')}</td>
+          <td>{pkg.depends}</td>
         </tr>
         <tr>
           <td>Recommends:</td>
-          <td>{getProp(packageInfo, 'Recommends')}</td>
+          <td>{pkg.recommends}</td>
         </tr>
         <tr>
           <td>Suggests:</td>
-          <td>{getProp(packageInfo, 'Suggests')}</td>
+          <td>{pkg.suggests}</td>
         </tr>
         <tr>
           <td>Breaks:</td>
-          <td>{getProp(packageInfo, 'Breaks')}</td>
+          <td>{pkg.breaks}</td>
         </tr>
         <tr>
           <td>Priority:</td>
-          <td>{getProp(packageInfo, 'Priority')}</td>
+          <td>{pkg.priority}</td>
         </tr>
         <tr>
           <td>Section:</td>
-          <td>{getProp(packageInfo, 'Section')}</td>
+          <td>{pkg.section}</td>
         </tr>
         </tbody>
       </table>
       <p>
         Description:
       </p>
-      <pre>{getDescription(packageInfo)}</pre>
+      <pre>{pkg.description}</pre>
     </div>;
   },
 });

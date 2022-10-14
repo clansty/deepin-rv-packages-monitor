@@ -1,25 +1,40 @@
-import { defineComponent } from 'vue';
-import { getProp } from '@/utils/packageFuns';
+import { defineComponent, PropType } from 'vue';
 import style from './PackageList.module.sass';
-import packages from '@/stores/packages';
+import { Package } from '@/types';
 
 export default defineComponent({
-  render() {
-    return <table class={style.pkgList}>
+  props: {
+    packages: { type: Array as PropType<Package[]>, required: true },
+    compare: Boolean,
+    arch: String,
+    compareArch: String,
+  },
+  setup(props) {
+    return () => <table class={style.pkgList}>
       <tr>
         <th>Package</th>
         <th>Source</th>
         <th>Architecture</th>
-        <th style="text-align: right">Version</th>
+        {props.compare && <th style="text-align: right">Version ({props.compareArch})</th>}
+        <th style="text-align: right">Version ({props.arch})</th>
       </tr>
-      {packages.map(pkg => (
-        <tr onClick={() => window.open(`/${getProp(pkg, 'Package')}`)}>
-          <td>{getProp(pkg, 'Package')}</td>
-          <td>{getProp(pkg, 'Source')}</td>
-          <td>{getProp(pkg, 'Architecture')}</td>
-          <td align="right">{getProp(pkg, 'Version')}</td>
-        </tr>
-      ))}
+      {props.packages.map(pkg => {
+        const isVersionSame = !pkg.versionX86 || pkg.versionX86 === pkg.version;
+        return (
+          // @ts-ignore
+          <tr onClick={() => window.open(`/${pkg.package}`)}>
+            <td>{pkg.package}</td>
+            <td>{pkg.source}</td>
+            <td>{pkg.architecture}</td>
+            {props.compare && <td align="right">
+              {pkg.versionX86}
+            </td>}
+            <td align="right" style={isVersionSame ? {} : { color: 'red' }}>
+              {pkg.version}
+            </td>
+          </tr>
+        );
+      })}
     </table>;
   },
 });
