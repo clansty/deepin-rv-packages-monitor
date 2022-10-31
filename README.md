@@ -1,11 +1,11 @@
-# Vue 3 + Typescript + Vite
+# Deepin RISC-V Packages Monitor
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 功能
 
-## Recommended IDE Setup
+构建时会自动下载 Deepin 的 [RISC-V](https://community-packages.deepin.com/beige/dists/beige/main/binary-amd64/Packages) 和 [x86_64](https://community-packages.deepin.com/beige/dists/beige/main/binary-amd64/Packages) 的 Packages，并分析比对生成 Deepin RISC-V 于 x86_64 的包对比列表以及缺少的包列表
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+## 部署
 
-## Type Support For `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+1. 确保安装好 Node.JS 和 yarn
+2. `yarn install`
+3. 执行 `./generate.sh`，构建的网页将在 `dist` 文件夹内
