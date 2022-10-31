@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import style from './PackageList.module.sass';
 import { Package } from '@/types';
 
@@ -8,8 +8,21 @@ export default defineComponent({
     compare: Boolean,
     arch: String,
     compareArch: String,
+    hideDbgsym: Boolean,
+    showDifferentOnly: Boolean,
   },
   setup(props) {
+    const packagesDisplay = computed(() => {
+      let res = props.packages;
+      if (props.hideDbgsym) {
+        res = res.filter(pkg => !pkg.package?.endsWith?.('-dbgsym'));
+      }
+      if (props.showDifferentOnly) {
+        res = res.filter(pkg => pkg.versionX86 !== pkg.version);
+      }
+      return res;
+    });
+
     return () => <table class={style.pkgList}>
       <tr>
         <th>Package</th>
@@ -18,7 +31,7 @@ export default defineComponent({
         {props.compare && <th style="text-align: right">Version ({props.compareArch})</th>}
         <th style="text-align: right">Version ({props.arch})</th>
       </tr>
-      {props.packages.map(pkg => {
+      {packagesDisplay.value.map(pkg => {
         const isVersionSame = !pkg.versionX86 || pkg.versionX86 === pkg.version;
         return (
           // @ts-ignore

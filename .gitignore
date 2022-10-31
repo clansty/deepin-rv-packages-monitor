@@ -15,3 +15,5 @@ yarn-error.log
 result
 .direnv
 tools/convert/Packages*
+src/data.json
+
