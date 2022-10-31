@@ -9,7 +9,7 @@ export default defineComponent({
   setup() {
     const hideDbgsym = ref(true);
     const showDifferentOnly = ref(false);
-    const compareWith = ref<'X86' | 'Sid'>('X86');
+    const compareWith = ref<'X86' | 'Sid' | 'SidRv'>('X86');
 
     return () => <div class={style.container}>
       <h1>Deepin RISC-V Packages (main)</h1>
@@ -33,12 +33,16 @@ export default defineComponent({
           {/* @ts-ignore */}
           <input type="radio" id="sid" value="Sid" vModel={compareWith.value} />
           <label for="sid">Debian Sid</label>
+
+          {/* @ts-ignore */}
+          <input type="radio" id="sidRv" value="SidRv" vModel={compareWith.value} />
+          <label for="sid">Debian Sid RISC-V</label>
         </span>
       </p>
       <PackageList
         // @ts-ignore
         packages={packages.riscvCompare as Package[]} compare={compareWith.value}
-        arch="RISC-V" compareArch="x86_64"
+        arch="RISC-V" compareArch="compared"
         hideDbgsym={hideDbgsym.value} showDifferentOnly={showDifferentOnly.value}
       />
       <RouterView />

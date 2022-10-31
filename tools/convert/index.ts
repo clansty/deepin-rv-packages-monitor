@@ -5,6 +5,7 @@ const packagesText = {
   x86: fs.readFileSync('./tools/convert/Packages-x86', 'utf-8').split('\n\n'),
   riscV: fs.readFileSync('./tools/convert/Packages-riscv', 'utf-8').split('\n\n'),
   sid: fs.readFileSync('./tools/convert/Packages-sid', 'utf-8').split('\n\n'),
+  sidRv: fs.readFileSync('./tools/convert/Packages-sid-rv', 'utf-8').split('\n\n'),
 };
 
 console.log('Parsing Packages');
@@ -31,10 +32,12 @@ console.log('Comparing Versions');
 const riscvCompare = packages.riscV.map(pkg => {
   const pkgCompareX86 = packages.x86.find(it => it.package === pkg.package);
   const pkgCompareSid = packages.sid.find(it => it.package === pkg.package);
+  const pkgCompareSidRv = packages.sidRv.find(it => it.package === pkg.package);
   return {
     ...pkg,
     versionX86: pkgCompareX86?.version,
     versionSid: pkgCompareSid?.version,
+    versionSidRv: pkgCompareSidRv?.version,
   };
 });
 

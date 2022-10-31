@@ -5,7 +5,7 @@ import { Package } from '@/types';
 export default defineComponent({
   props: {
     packages: { type: Array as PropType<Package[]>, required: true },
-    compare: String as PropType<'X86' | 'Sid'>,
+    compare: String as PropType<'X86' | 'Sid' | 'SidRv'>,
     arch: String,
     compareArch: String,
     hideDbgsym: Boolean,
