@@ -35,6 +35,8 @@ const riscvCompare = packages.riscV.map(pkg => {
   };
 });
 
-const pkgsMissing = packages.x86.filter(pkg => !packages.riscV.find(it => it.package === pkg.package));
+const pkgsMissing = packages.x86
+  .filter(pkg => !pkg.package?.endsWith?.('-dbgsym'))
+  .filter(pkg => !packages.riscV.find(it => it.package === pkg.package));
 
 fs.writeFileSync('./src/data.json', JSON.stringify({ riscvCompare, pkgsMissing }));

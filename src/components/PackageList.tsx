@@ -22,7 +22,7 @@ export default defineComponent({
         const isVersionSame = !pkg.versionX86 || pkg.versionX86 === pkg.version;
         return (
           // @ts-ignore
-          <tr onClick={() => window.open(`/${pkg.package}`)}>
+          <tr onClick={() => arch === 'RISC-V' && window.open(`/${pkg.package}`)}>
             <td>{pkg.package}</td>
             <td>{pkg.source}</td>
             <td>{pkg.architecture}</td>

@@ -14,3 +14,4 @@ dist-ssr
 yarn-error.log
 result
 .direnv
+tools/convert/Packages*

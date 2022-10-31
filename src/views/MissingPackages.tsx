@@ -10,7 +10,7 @@ export default defineComponent({
     return <div class={style.container}>
       <h1>Deepin RISC-V Missing Packages (main)</h1>
       {/** @ts-ignore **/}
-      <PackageList packages={packages.pkgsMissing as Package[]} arch="X86" />
+      <PackageList packages={packages.pkgsMissing as Package[]} arch="x86_64" />
       <RouterView />
     </div>;
   },
