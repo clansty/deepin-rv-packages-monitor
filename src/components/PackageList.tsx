@@ -5,7 +5,7 @@ import { Package } from '@/types';
 export default defineComponent({
   props: {
     packages: { type: Array as PropType<Package[]>, required: true },
-    compare: Boolean,
+    compare: String as PropType<'X86' | 'Sid'>,
     arch: String,
     compareArch: String,
     hideDbgsym: Boolean,
@@ -32,7 +32,7 @@ export default defineComponent({
         <th style="text-align: right">Version ({props.arch})</th>
       </tr>
       {packagesDisplay.value.map(pkg => {
-        const isVersionSame = !pkg.versionX86 || pkg.versionX86 === pkg.version;
+        const isVersionSame = !pkg[`version${props.compare}`] || pkg[`version${props.compare}`] === pkg.version;
         return (
           // @ts-ignore
           <tr onClick={() => props.arch === 'RISC-V' && window.open(`/${pkg.package}`)}>
@@ -40,7 +40,7 @@ export default defineComponent({
             <td>{pkg.source}</td>
             <td>{pkg.architecture}</td>
             {props.compare && <td align="right">
-              {pkg.versionX86}
+              {pkg[`version${props.compare}`]}
             </td>}
             <td align="right" style={isVersionSame ? {} : { color: 'red' }}>
               {pkg.version}
