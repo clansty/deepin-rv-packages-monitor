@@ -1,6 +1,8 @@
 import { defineComponent, PropType, computed } from 'vue';
 import style from './PackageList.module.sass';
 import { Package } from '@/types';
+import { useClipboard } from '@vueuse/core';
+import { RouterLink } from 'vue-router';
 
 export default defineComponent({
   props: {
@@ -12,6 +14,8 @@ export default defineComponent({
     showDifferentOnly: Boolean,
   },
   setup(props) {
+    const { copy, copied } = useClipboard();
+
     const packagesDisplay = computed(() => {
       let res = props.packages;
       if (props.hideDbgsym) {
@@ -21,6 +25,19 @@ export default defineComponent({
         res = res.filter(pkg => pkg.versionX86 !== pkg.version);
       }
       return res;
+    });
+
+    const CopyText = defineComponent({
+      props: {
+        text: String,
+      },
+      setup(props) {
+        return () =>
+          // @ts-ignore
+          <span style="cursor: pointer" onClick={() => copy(props.text)}>
+        {props.text}
+      </span>;
+      },
     });
 
     return () => <table class={style.pkgList}>
@@ -34,17 +51,19 @@ export default defineComponent({
       {packagesDisplay.value.map(pkg => {
         const isVersionSame = !pkg[`version${props.compare}`] || pkg[`version${props.compare}`] === pkg.version;
         return (
-          // @ts-ignore
-          <tr onClick={() => props.arch === 'RISC-V' && window.open(`/${pkg.package}`)}>
-            <td>{pkg.package}</td>
-            <td>{pkg.source}</td>
-            <td>{pkg.architecture}</td>
+          <tr>
+            <td><CopyText text={pkg.package} /></td>
+            <td><CopyText text={pkg.source} /></td>
+            <td><CopyText text={pkg.architecture} /></td>
             {props.compare && <td align="right">
-              {pkg[`version${props.compare}`]}
+              <CopyText text={pkg[`version${props.compare}`]} />
             </td>}
             <td align="right" style={isVersionSame ? {} : { color: 'red' }}>
-              {pkg.version}
+              <CopyText text={pkg.version} />
             </td>
+            {props.arch === 'RISC-V' && <td style={{ paddingLeft: '10px' }}>
+              <RouterLink to={'/' + pkg.package}>Details</RouterLink>
+            </td>}
           </tr>
         );
       })}
