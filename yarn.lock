@@ -695,6 +695,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4":
+  version: 4.14.188
+  resolution: "@types/lodash@npm:4.14.188"
+  checksum: 89c32f0a18e0da6ae914b430e76b3d0451c4c85b9c838b440c0c9a8d4966c8e2a76dbb30964c7126402856b2997ec56a8c36d8d6461ec14387689ec37594f09f
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:^4.14.181":
   version: 4.14.182
   resolution: "@types/lodash@npm:4.14.182"
@@ -2332,9 +2339,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "plct-packages-monitor@workspace:."
   dependencies:
+    "@types/lodash": ^4
     "@types/node": ^18.8.5
     "@vitejs/plugin-vue-jsx": ^2.0.1
     "@vueuse/core": ^9.4.0
+    lodash: ^4.17.21
     naive-ui: ^2.33.3
     pinia: ^2.0.22
     sass: ^1.54.9

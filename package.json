@@ -10,8 +10,11 @@
     "convert": "ts-node tools/convert/index.ts"
   },
   "devDependencies": {
+    "@types/lodash": "^4",
     "@types/node": "^18.8.5",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "@vueuse/core": "^9.4.0",
+    "lodash": "^4.17.21",
     "naive-ui": "^2.33.3",
     "pinia": "^2.0.22",
     "sass": "^1.54.9",
@@ -23,8 +26,5 @@
     "vue-router": "^4.1.5",
     "vue-tsc": "^0.40.13"
   },
-  "packageManager": "yarn@3.2.3",
-  "dependencies": {
-    "@vueuse/core": "^9.4.0"
-  }
+  "packageManager": "yarn@3.2.3"
 }
